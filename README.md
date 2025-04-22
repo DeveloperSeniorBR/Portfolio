@@ -11,12 +11,12 @@ Sistema para gerenciar os dados do portfólio de projetos de uma empresa, permit
 
 1. Clone o repositório:
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone https://github.com/DeveloperSeniorBR/Portfolio.git
 ```
 
 2. Navegue até o diretório do projeto:
 ```bash
-cd portfolio
+cd Portfolio
 ```
 
 3. Compile o projeto:
@@ -41,6 +41,85 @@ http://localhost:8080
 http://localhost:8080/h2-console
 ```
 
+## API REST
+
+O sistema disponibiliza web services REST para gerenciamento de projetos, pessoas e membros.
+
+### API de Projetos
+
+#### Endpoints
+```
+GET    /api/projetos          - Lista todos os projetos
+GET    /api/projetos/{id}     - Busca um projeto específico
+POST   /api/projetos          - Cria um novo projeto
+PUT    /api/projetos/{id}     - Atualiza um projeto existente
+DELETE /api/projetos/{id}     - Exclui um projeto
+```
+
+#### Exemplo de Requisição (POST/PUT)
+```json
+{
+    "nome": "Projeto Teste",
+    "dataInicio": "2024-01-01",
+    "dataPrevisaoFim": "2024-12-31",
+    "dataFim": null,
+    "descricao": "Descrição do projeto",
+    "status": "EM_ANALISE",
+    "orcamento": 100000.00,
+    "risco": "BAIXO",
+    "gerenteId": 1
+}
+```
+
+#### Validações
+- O gerente deve existir
+- O gerente deve ter atribuição de gerente
+- Não é possível excluir projetos com status iniciado, em andamento ou encerrado
+
+### API de Pessoas
+
+#### Endpoints
+```
+GET    /api/pessoas          - Lista todas as pessoas
+GET    /api/pessoas/{id}     - Busca uma pessoa específica
+POST   /api/pessoas          - Cria uma nova pessoa
+PUT    /api/pessoas/{id}     - Atualiza uma pessoa existente
+DELETE /api/pessoas/{id}     - Exclui uma pessoa
+```
+
+#### Exemplo de Requisição (POST/PUT)
+```json
+{
+    "nome": "João Silva",
+    "dataNascimento": "1990-01-01",
+    "cpf": "123.456.789-00",
+    "funcionario": true,
+    "gerente": false,
+    "atribuicao": "Desenvolvedor"
+}
+```
+
+### API de Membros
+
+#### Endpoints
+```
+POST   /api/membros          - Cria um novo membro
+```
+
+#### Exemplo de Requisição
+```json
+{
+    "pessoaId": 1,
+    "projetoId": 1,
+    "atribuicao": "Desenvolvedor Backend"
+}
+```
+
+#### Validações
+- A pessoa deve existir
+- A pessoa deve ser funcionário
+- O projeto deve existir
+
 ## Funcionalidades
 
 ### Projetos
@@ -58,45 +137,6 @@ http://localhost:8080/h2-console
 - Cadastro de pessoas com nome, data de nascimento, CPF e atribuição
 - Definição de pessoa como funcionário ou não
 - Definição de pessoa como gerente ou não
-
-## Web Service de Membros
-
-O sistema disponibiliza um web service REST para cadastro de membros, protegido por autenticação básica.
-
-### Endpoint
-```
-POST /api/membros
-```
-
-### Autenticação
-- Usuário: admin
-- Senha: admin
-
-### Exemplo de Requisição
-```json
-{
-    "pessoaId": 1,
-    "projetoId": 1,
-    "atribuicao": "Desenvolvedor Backend"
-}
-```
-
-### Exemplo de Resposta
-```json
-{
-    "id": 1,
-    "pessoa": {
-        "id": 1,
-        "nome": "João Silva",
-        "atribuicao": "Desenvolvedor"
-    },
-    "projeto": {
-        "id": 1,
-        "nome": "Projeto Teste"
-    },
-    "atribuicao": "Desenvolvedor Backend"
-}
-```
 
 ## Testes
 

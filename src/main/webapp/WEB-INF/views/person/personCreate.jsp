@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <c:import url="../fragments/menu.jsp">
+    <c:import url="../common/menu.jsp">
         <c:param name="active" value="pessoas"/>
     </c:import>
 
@@ -95,6 +95,15 @@
                         <form:checkbox path="funcionario" class="form-check-input" id="funcionario" />
                         <label class="form-check-label" for="funcionario">
                             É funcionário
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check">
+                        <form:checkbox path="gerente" class="form-check-input" id="gerente" />
+                        <label class="form-check-label" for="gerente">
+                            É gerente
                         </label>
                     </div>
                 </div>

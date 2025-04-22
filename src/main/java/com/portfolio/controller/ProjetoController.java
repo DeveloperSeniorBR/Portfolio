@@ -24,14 +24,14 @@ public class ProjetoController {
     public String listar(Model model) {
         List<Projeto> projetos = projetoService.listarTodos();
         model.addAttribute("projetos", projetos);
-        return "projetos/lista";
+        return "project/projectList";
     }
 
     @GetMapping("/novo")
     public String novo(Model model) {
         model.addAttribute("projeto", new Projeto());
         model.addAttribute("pessoas", pessoaService.listarTodos());
-        return "projetos/form";
+        return "project/projectCreate";
     }
 
     @PostMapping("/salvar")
@@ -46,7 +46,7 @@ public class ProjetoController {
                 .orElseThrow(() -> new IllegalArgumentException("Projeto não encontrado"));
         model.addAttribute("projeto", projeto);
         model.addAttribute("pessoas", pessoaService.listarTodos());
-        return "projetos/form";
+        return "project/projectCreate";
     }
 
     @PostMapping("/{id}/excluir")

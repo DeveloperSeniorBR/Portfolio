@@ -18,13 +18,13 @@ public class PessoaController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("pessoas", pessoaService.listarTodos());
-        return "pessoas/list";
+        return "person/personList";
     }
 
     @GetMapping("/novo")
     public String novo(Model model) {
         model.addAttribute("pessoa", new Pessoa());
-        return "pessoas/form";
+        return "person/personCreate";
     }
 
     @PostMapping("/salvar")
@@ -35,7 +35,7 @@ public class PessoaController {
             return "redirect:/pessoas";
         } catch (Exception e) {
             attr.addFlashAttribute("erro", "Erro ao salvar pessoa: " + e.getMessage());
-            return "redirect:/pessoas/form";
+            return "redirect:/pessoas/novo";
         }
     }
 
@@ -45,7 +45,7 @@ public class PessoaController {
             Pessoa pessoa = pessoaService.buscarPorId(id)
                     .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
             model.addAttribute("pessoa", pessoa);
-            return "pessoas/form";
+            return "person/personCreate";
         } catch (Exception e) {
             attr.addFlashAttribute("erro", "Pessoa não encontrada");
             return "redirect:/pessoas";

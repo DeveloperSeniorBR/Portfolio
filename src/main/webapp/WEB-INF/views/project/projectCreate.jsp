@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-    <c:import url="../fragments/menu.jsp">
+    <c:import url="../common/menu.jsp">
         <c:param name="active" value="projetos"/>
     </c:import>
 
